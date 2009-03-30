@@ -1,0 +1,155 @@
+/*
+Theme Name: Minimal
+Theme URI: http://h6e.net/wordpress/themes/wp-minimal
+Description: A Minimal theme for Wordpress. Built with native bmPress support.
+Version: 0.2a
+Author: h6e.net
+Author URI: http://h6e.net/
+*/
+
+/* General
+-------------------------------------------------------------- */
+
+body, a {
+	color:#4E5368;
+}
+
+a { color:#4E5368; }
+a:visited { color:#4E5368; }
+
+/* Layout
+-------------------------------------------------------------- */
+
+#wrapper {
+	margin:auto;
+	padding:2.5em;
+}
+
+#container {
+	width:100%;
+	overflow:hidden;
+}
+
+#content {
+	width:70%;
+	float:left;
+}
+
+#sidebar {
+	width:30%;
+	float:left;
+}
+
+#footer {
+	padding-top:0.5em;
+}
+
+/* Header
+-------------------------------------------------------------- */
+
+#blog-description {
+	font-size:1.2em;
+}
+
+#access {
+	float:right;
+	padding:0.5em 1.5em;
+}
+
+#access a {
+	color:white;
+	text-decoration:none;
+}
+
+#access a:hover, #access a:focus {
+	color:inherit;
+	text-decoration:underline;
+}
+
+.h6e-page-title {
+	margin-bottom:0.25em;
+}
+
+/* Content
+-------------------------------------------------------------- */
+
+.post {
+	margin:2.5em 0;
+}
+
+.day-date {
+	margin-top:1.5em;
+	clear:left;
+	
+	/* like h6e-extra-title */
+	color:#4E5368;
+	font-size:1.6em;
+	letter-spacing:-0.075em;
+	margin-bottom:0.75em;
+	text-transform:capitalize;
+}
+
+.entry-title {
+	margin-bottom:0;
+}
+
+.entry-title, .entry-title a {
+	color:#009DFF;
+}
+
+.entry-title a { text-decoration:none; }
+.entry-title a:hover { text-decoration:underline; }
+
+.entry {
+	color:#4E5368;
+	font-size:1.2em;
+	line-height:1.3em;
+	text-align:justify;
+}
+
+.navigation {
+	clear:both;
+	padding-top:2em;
+}
+
+/* Sidebar
+-------------------------------------------------------------- */
+
+#sidebar .h6e-extra-widget {
+	font-size:inherit;
+}
+
+.sidebar {
+	padding-left:2em;
+}
+
+#s { width:60%; }
+
+/* BM specific rules
+-------------------------------------------------------------- */
+
+.bm-screenshot {
+	margin-top:3px;
+}
+
+.bm-mark .entry-title {
+	font-size:1.5em;
+	line-height:1.2em;
+}
+
+.bm-mark .entry-title, .bm-mark .entry-title a {
+	color:#4E5368;
+}
+
+/* WP images
+-------------------------------------------------------------- */
+
+img.alignleft { margin-right:1em; }
+img.alignright { margin-left:1em; }
+
+/* Patch to h6e extra sidebars
+-------------------------------------------------------------- */
+
+ul.xoxo {
+	list-style-type:none;
+}
