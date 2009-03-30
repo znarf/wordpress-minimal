@@ -117,7 +117,7 @@ function h6e_minimal_theme_page() {
 				<td>
 				<input class="regular-text" type="text" name="pagewidth" value="<?php
 					$pagewidth = get_option('h6e_minimal_pagewidth');
-					echo $pagewidth ? $pagewidth : 'auto';
+					echo $pagewidth ? $pagewidth : '60em';
 				?>" />
 				eg: <em>auto</em>, <em>60em</em>, <em>720px</em>
 				</td>
@@ -169,9 +169,13 @@ function h6e_minimal_head() {
 	}
 	if ( false !== ( $pagewidth = get_option('h6e_minimal_pagewidth') ) ) {
 		$output .= ".h6e-main-content { width: $pagewidth; }\n";
+	} else {
+		$output .= ".h6e-main-content { width: 60em; }\n";
 	}
 	if ( false !== ( $fontsize = get_option('h6e_minimal_fontsize') ) ) {
 		$output .= ".h6e-main-content { font-size: $fontsize; }\n";
+	} else {
+		$output .= ".h6e-main-content { font-size: 1.2em; }\n";
 	}
 	$foot = "--></style>\n";
 	if ( '' != $output )
