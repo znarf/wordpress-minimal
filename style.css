@@ -7,23 +7,8 @@ Author: h6e.net
 Author URI: http://h6e.net/
 */
 
-/* General
--------------------------------------------------------------- */
-
-body, a {
-	color:#4E5368;
-}
-
-a { color:#4E5368; }
-a:visited { color:#4E5368; }
-
 /* Layout
 -------------------------------------------------------------- */
-
-#wrapper {
-	margin:auto;
-	padding:2.5em;
-}
 
 #container {
 	width:100%;

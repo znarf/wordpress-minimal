@@ -17,5 +17,7 @@
 
 <?php wp_footer() ?>
 
+<?php if (function_exists('ld_top_bar')) { ld_top_bar(); } ?>
+
 </body>
 </html>
