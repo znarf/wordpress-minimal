@@ -17,17 +17,5 @@
 
 <?php wp_footer() ?>
 
-<?php
-if (get_option('topbar') == 'never') {
-    $top_bar = false;
-} else if (get_option('topbar') == 'connected' && !is_user_logged_in()) {
-    $top_bar = false;
-} else {
-    $top_bar = true;
-}
-?>
-
-<?php if (function_exists('ld_top_bar') && $top_bar) { ld_top_bar(); } ?>
-
 </body>
 </html>

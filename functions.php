@@ -167,10 +167,8 @@ function h6e_minimal_head() {
 	if ( false !== ( $titlecolor = get_option('h6e_minimal_titlecolor') ) ) {
 		$output .= ".h6e-entry-title, .h6e-entry-title a, .h6e-entry-title a:visited { color: $titlecolor; }\n";
 	}
-	if ( false !== ( $pagewidth = get_option('h6e_minimal_pagewidth') ) ) {
+	if ( false !== ( $pagewidth = get_option('h6e_minimal_pagewidth') ) && $pagewidth != 'auto' ) {
 		$output .= ".h6e-main-content { width: $pagewidth; }\n";
-	} else {
-		$output .= ".h6e-main-content { width: 60em; }\n";
 	}
 	if ( false !== ( $fontsize = get_option('h6e_minimal_fontsize') ) ) {
 		$output .= ".h6e-main-content { font-size: $fontsize; }\n";
