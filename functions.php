@@ -1,5 +1,7 @@
 <?php
 
+load_theme_textdomain( 'minimal' );
+
 if (!function_exists('h6e_widgets_init')) {
 	function h6e_widgets_init()
 	{
@@ -96,7 +98,10 @@ function h6e_minimal_add_theme_page()
 			die;
 		}
 	}
-	add_theme_page(__('Customize Theme'), __('Customize Theme'), 'edit_themes', basename(__FILE__), 'h6e_minimal_theme_page');
+	add_theme_page(
+		__('Customize Theme', 'minimal'), __('Customize Theme', 'minimal'),
+		'edit_themes', basename(__FILE__), 'h6e_minimal_theme_page'
+	);
 }
 
 
@@ -105,7 +110,7 @@ function h6e_minimal_theme_page() {
 		echo '<div id="message" class="updated fade"><p><strong>'.__('Options saved.').'</strong></p></div>';
 ?>
 <div class='wrap'>
-	<h2><?php _e('Customize Theme'); ?></h2>
+	<h2><?php _e('Customize Theme', 'minimal'); ?></h2>
 	<div id="minimal-customize">
 		<form method="post" action="">
 
