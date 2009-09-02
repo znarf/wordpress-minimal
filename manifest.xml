@@ -7,7 +7,7 @@
   <extend>wordpress</extend>
   <directory>wp-content/themes/minimal</directory>
   <configuration>
-      <preference type="text" name="h6e_minimal_pagewidth" label="Width" defaultValue="60em"/>
+      <preference type="text" name="h6e_minimal_pagewidth" label="Width" defaultValue="auto"/>
       <preference type="text" name="h6e_minimal_fontsize" label="Font Size" defaultValue="1.2em"/>
       <preference type="color" name="h6e_minimal_titlecolor" label="Title Color" defaultValue="#009DFF"/>
       <preference type="list" label="Display the top bar" name="topbar">
