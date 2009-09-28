@@ -28,7 +28,13 @@ if (get_option('topbar') == 'never') {
 }
 ?>
 
-<?php if (class_exists('Ld_Ui') && method_exists('Ld_Ui', 'top_bar') && $top_bar) { Ld_Ui::top_bar(); } ?>
+<?php
+if (class_exists('Ld_Ui') && method_exists('Ld_Ui', 'top_bar') && $top_bar) {
+    Ld_Ui::top_bar(array(
+        'loginUrl' => wp_login_url(), 'logoutUrl' => wp_logout_url()
+    ));
+}
+?>
 
 <div id="wrapper" class="hfeed h6e-main-content">
 
