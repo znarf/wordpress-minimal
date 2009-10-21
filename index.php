@@ -16,7 +16,7 @@
 
 					<?php else : ?>
 
-						<h2 class="entry-title h6e-entry-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="?php printf(__('Permanent Link to %s', 'minimal'), the_title_attribute('echo=0')); ?>"><?php the_title(); ?></a></h2>
+						<h2 class="entry-title h6e-entry-title"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php printf(__('Permanent Link to %s', 'minimal'), the_title_attribute('echo=0')); ?>"><?php the_title(); ?></a></h2>
 					
 						<div class="h6e-post-info">
 							<?php the_time(__('F jS, Y', 'minimal')) ?>
