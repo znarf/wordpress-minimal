@@ -16,7 +16,7 @@
 
 </head>
 
-<body>
+<body class="h6e-layout">
     
 <?php
 if (get_option('topbar') == 'never') {
