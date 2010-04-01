@@ -50,10 +50,32 @@ add_filter('previous_posts_link_attributes', 'h6e_previous_posts_link_attributes
 
 function h6e_minimal_css()
 {
-	$h6e_css_path = defined('H6E_CSS') ? H6E_CSS : get_bloginfo('stylesheet_directory');
-	echo $h6e_css_path . '/h6e-minimal/h6e-minimal.css';	
+	if (function_exists('ld_stylesheet')) {
+		echo ld_stylesheet('/h6e-minimal/h6e-minimal.css', 'css-h6e-minimal');
+	} else if (file_exists(dirname(__FILE__) . '/h6e-minimal')) {
+		echo get_bloginfo('stylesheet_directory') . '/h6e-minimal/h6e-minimal.css';
+	} else if (defined('H6E_CSS')) {
+		echo H6E_CSS . '/h6e-minimal/h6e-minimal.css';
+	} else {
+		echo 'http://h6e.net/css/h6e-minimal/h6e-minimal.css';
+	}
 }
 
+function minimal_top_bar()
+{
+	if (get_option('topbar') == 'never') {
+		$top_bar = false;
+	} else if (get_option('topbar') == 'connected' && !is_user_logged_in()) {
+		$top_bar = false;
+	} else {
+		$top_bar = true;
+	}
+	if (class_exists('Ld_Ui') && method_exists('Ld_Ui', 'top_bar') && $top_bar) {
+		Ld_Ui::top_bar(array(
+			'loginUrl' => wp_login_url(), 'logoutUrl' => wp_logout_url($_SERVER["REQUEST_URI"])
+		));
+	}
+}
 
 add_action('admin_menu', 'h6e_minimal_add_theme_page');
 

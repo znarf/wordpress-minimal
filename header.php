@@ -17,24 +17,8 @@
 </head>
 
 <body class="h6e-layout">
-    
-<?php
-if (get_option('topbar') == 'never') {
-    $top_bar = false;
-} else if (get_option('topbar') == 'connected' && !is_user_logged_in()) {
-    $top_bar = false;
-} else {
-    $top_bar = true;
-}
-?>
 
-<?php
-if (class_exists('Ld_Ui') && method_exists('Ld_Ui', 'top_bar') && $top_bar) {
-    Ld_Ui::top_bar(array(
-        'loginUrl' => wp_login_url(), 'logoutUrl' => wp_logout_url($_SERVER["REQUEST_URI"])
-    ));
-}
-?>
+<?php minimal_top_bar() ?>
 
 <div id="wrapper" class="hfeed h6e-main-content">
 
