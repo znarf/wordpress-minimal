@@ -22,12 +22,6 @@
 
 <div id="wrapper" class="hfeed h6e-main-content">
 
-	<div id="access">
-		<div class="skip-link">
-			<a href="#content" title="<?php _e( 'Skip to content', 'sandbox' ) ?>"><?php _e( 'Skip to content', 'sandbox' ) ?></a>
-		</div>
-	</div><!-- #access -->
-
 	<div id="header">
 		<h1 class="h6e-page-title" id="blog-title"><span>
 			<a href="<?php bloginfo('home') ?>/" title="<?php echo wp_specialchars( get_bloginfo('name'), 1 ) ?>" rel="home">
