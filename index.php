@@ -6,7 +6,7 @@
 
 			<?php while ( have_posts() ) : the_post() ?>
 
-				<?php the_date(__('F jS, Y', 'minimal'), '<h3 class="day-date">', '</h3>'); ?>
+				<?php the_date(__('F jS, Y', 'minimal'), '<h3 class="day-date h6e-day-date">', '</h3>'); ?>
 
 				<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 
