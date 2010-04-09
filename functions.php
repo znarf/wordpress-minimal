@@ -50,8 +50,8 @@ add_filter('previous_posts_link_attributes', 'h6e_previous_posts_link_attributes
 
 function h6e_minimal_css()
 {
-	if (function_exists('ld_stylesheet')) {
-		echo ld_stylesheet('/h6e-minimal/h6e-minimal.css', 'css-h6e-minimal');
+	if (method_exists('Ld_Ui', 'getCssUrl')) {
+		echo Ld_Ui::getCssUrl('/h6e-minimal/h6e-minimal.css', 'h6e-minimal');
 	} else if (file_exists(dirname(__FILE__) . '/h6e-minimal')) {
 		echo get_bloginfo('stylesheet_directory') . '/h6e-minimal/h6e-minimal.css';
 	} else if (defined('H6E_CSS')) {
