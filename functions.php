@@ -1,32 +1,41 @@
 <?php
 
-load_theme_textdomain( 'minimal' );
-
-if (!function_exists('h6e_widgets_init')) {
-	function h6e_widgets_init()
+if (!function_exists('h6e_minimal_setup')) {
+	function h6e_minimal_setup()
 	{
-		if ( !function_exists('register_sidebars') ) {
-			echo 'This theme is supposed to run on WP 2.7+. register_sidebars function is missing.';
-			return;
-		}
-
-		// code from the WP Sandbox theme - GPL
-		// http://www.plaintxt.org/themes/sandbox/
-
-		// Formats the widgets, adding readability-improving whitespace
-		$p = array(
-			'before_widget'  =>   "\n\t\t\t" . '<li id="%1$s" class="h6e-extra-widget %2$s">',
-			'after_widget'   =>   "\n\t\t\t</li>\n",
-			'before_title'   =>   "\n\t\t\t\t". '<h3 class="h6e-extra-title">',
-			'after_title'    =>   "</h3>\n"
-		);
-
-		// Table for how many? Two? This way, please.
-		register_sidebars( 2, $p );
+		load_theme_textdomain( 'minimal' );
 	}
 }
 
-add_action( 'init', 'h6e_widgets_init' );
+add_action( 'after_setup_theme', 'h6e_minimal_setup' );
+
+if (!function_exists('h6e_minimal_init')) {
+	function h6e_minimal_init()
+	{
+		register_sidebar( array(
+			'name' => 'Primary Widget Area',
+			'id' => 'primary-widget-area',
+			'description' => __( 'The primary widget area' , 'minimal' ),
+			'before_widget' => "\n\t\t\t" . '<li id="%1$s" class="widget-container h6e-extra-widget %2$s">',
+			'after_widget' => "\n\t\t\t</li>\n",
+			'before_title' => "\n\t\t\t\t". '<h3 class="widget-title h6e-extra-title">',
+			'after_title' => "</h3>\n"
+		) );
+	}
+}
+
+add_action( 'init', 'h6e_minimal_init' );
+
+function h6e_minimal_the_author()
+{
+	$author_id = get_the_author_meta( 'ID' );
+	echo get_avatar($author_id, 16) . ' ';
+	printf('<span class="meta-sep"> by </span> ' . '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s</a></span>',
+		get_author_posts_url( $author_id ),
+		sprintf( esc_attr__( 'View all posts by %s', 'minimal' ), get_the_author() ),
+		get_the_author()
+	);
+}
 
 if (!function_exists('h6e_next_posts_link_attributes')) {
 	function h6e_next_posts_link_attributes($attributes)
@@ -51,7 +60,7 @@ add_filter('previous_posts_link_attributes', 'h6e_previous_posts_link_attributes
 function h6e_minimal_css()
 {
 	if (method_exists('Ld_Ui', 'getCssUrl')) {
-		echo Ld_Ui::getCssUrl('/h6e-minimal/h6e-minimal.css', 'h6e-minimal');
+		echo Ld_Ui::getCssUrl('/h6e-minimal/h6e-minimal.css', 'css-h6e-minimal');
 	} else if (file_exists(dirname(__FILE__) . '/h6e-minimal')) {
 		echo get_bloginfo('stylesheet_directory') . '/h6e-minimal/h6e-minimal.css';
 	} else if (defined('H6E_CSS')) {
@@ -121,8 +130,7 @@ function h6e_minimal_add_theme_page()
 		}
 	}
 	add_theme_page(
-		__('Customize Theme', 'minimal'), __('Customize Theme', 'minimal'),
-		'edit_themes', basename(__FILE__), 'h6e_minimal_theme_page'
+		__('Minimal options', 'minimal'), __('Minimal options', 'minimal'), 'edit_theme_options', basename(__FILE__), 'h6e_minimal_theme_page'
 	);
 }
 
@@ -132,7 +140,7 @@ function h6e_minimal_theme_page() {
 		echo '<div id="message" class="updated fade"><p><strong>'.__('Options saved.').'</strong></p></div>';
 ?>
 <div class='wrap'>
-	<h2><?php _e('Customize Theme', 'minimal'); ?></h2>
+	<h2><?php _e('Minimal options', 'minimal'); ?></h2>
 	<div id="minimal-customize">
 		<form method="post" action="">
 

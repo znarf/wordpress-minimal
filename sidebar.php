@@ -1,15 +1,9 @@
 <div id="sidebar">
 
-	<div id="primary" class="sidebar">
+	<div id="primary" class="widget-area sidebar">
 		<ul class="xoxo">
-			<?php dynamic_sidebar(1) ?>
+			<?php dynamic_sidebar( 'primary-widget-area' ) ?>
 		</ul>
-	</div><!-- #primary .sidebar -->
-
-	<div id="secondary" class="sidebar">
-		<ul class="xoxo">
-			<?php dynamic_sidebar(2) ?>
-		</ul>
-	</div><!-- #secondary .sidebar -->
+	</div>
 
 </div>

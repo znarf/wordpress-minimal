@@ -2,7 +2,7 @@
 Theme Name: Minimal
 Theme URI: http://h6e.net/wordpress/themes/wp-minimal
 Description: A Minimal theme for Wordpress. Built with native bmPress support.
-Version: 0.4.1
+Version: 4.2
 Author: h6e.net
 Author URI: http://h6e.net/
 */
@@ -29,6 +29,11 @@ Author URI: http://h6e.net/
 	padding-top:0.5em;
 }
 
+.h6e-main-content {
+	margin-top:2em;
+	margin-bottom:1em;
+}
+
 /* Header
 -------------------------------------------------------------- */
 
@@ -37,7 +42,7 @@ Author URI: http://h6e.net/
 }
 
 #blog-title {
-	margin-bottom:0.25em;
+	margin:0.5em 0 0.25em;
 }
 
 /* Content
@@ -75,6 +80,10 @@ Author URI: http://h6e.net/
 	font-size:1.2em;
 	line-height:1.3em;
 	text-align:justify;
+}
+
+.h6e-post-info img.avatar {
+	vertical-align:-25%;
 }
 
 .navigation {
