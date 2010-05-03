@@ -2,7 +2,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes() ?>>
 <head profile="http://gmpg.org/xfn/11">
 
-<title><?php wp_title('&laquo;', true, 'right'); ?> <?php bloginfo('name'); ?> - <?php bloginfo('description') ?></title>
+<title><?php
+    // Returns the title based on the type of page being viewed
+	if ( is_single() ) {
+		single_post_title(); echo ' | '; bloginfo( 'name' );
+	} elseif ( is_home() || is_front_page() ) {
+		bloginfo( 'name' ); 
+		if( get_bloginfo( 'description' ) ) 
+			echo ' | ' ; bloginfo( 'description' ); 
+		h6e_minimal_the_page_number();
+	} elseif ( is_page() ) {
+		single_post_title( '' ); echo ' | '; bloginfo( 'name' );
+	} elseif ( is_search() ) {
+		printf( __( 'Search results for "%s"', 'minimal' ), esc_html( $s ) ); h6e_minimal_the_page_number(); echo ' | '; bloginfo( 'name' );
+	} elseif ( is_404() ) {
+		_e( 'Not Found', 'minimal' ); echo ' | '; bloginfo( 'name' );
+	} else {
+		wp_title( '' ); echo ' | '; bloginfo( 'name' ); h6e_minimal_the_page_number();
+	}
+?></title>
 
 <meta http-equiv="content-type" content="<?php bloginfo('html_type') ?>; charset=<?php bloginfo('charset') ?>" />
 

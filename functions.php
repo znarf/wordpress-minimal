@@ -30,11 +30,40 @@ function h6e_minimal_the_author()
 {
 	$author_id = get_the_author_meta( 'ID' );
 	echo get_avatar($author_id, 16) . ' ';
-	printf('<span class="meta-sep"> by </span> ' . '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s</a></span>',
+	printf('<span class="meta-sep"> ' . __('by') . ' </span> ' . '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s</a></span>',
 		get_author_posts_url( $author_id ),
 		sprintf( esc_attr__( 'View all posts by %s', 'minimal' ), get_the_author() ),
 		get_the_author()
 	);
+}
+
+// from twentyten:functions.php:200
+function h6e_minimal_the_page_number()
+{
+	global $paged; // Contains page number.
+	if ( $paged >= 2 )
+		echo ' | ' . sprintf( __( 'Page %s' , 'minimal' ), $paged );
+}
+
+// from twentyten:header.php:17
+function h6e_minimal_the_title()
+{
+	if ( is_single() ) {
+		single_post_title(); echo ' | '; bloginfo( 'name' );
+	} elseif ( is_home() || is_front_page() ) {
+		bloginfo( 'name' ); 
+		if( get_bloginfo( 'description' ) ) 
+			echo ' | ' ; bloginfo( 'description' ); 
+		h6e_minimal_the_page_number();
+	} elseif ( is_page() ) {
+		single_post_title( '' ); echo ' | '; bloginfo( 'name' );
+	} elseif ( is_search() ) {
+		printf( __( 'Search results for "%s"', 'minimal' ), esc_html( $s ) ); h6e_minimal_the_page_number(); echo ' | '; bloginfo( 'name' );
+	} elseif ( is_404() ) {
+		_e( 'Not Found', 'minimal' ); echo ' | '; bloginfo( 'name' );
+	} else {
+		wp_title( '' ); echo ' | '; bloginfo( 'name' ); h6e_minimal_the_page_number();
+	}
 }
 
 if (!function_exists('h6e_next_posts_link_attributes')) {
