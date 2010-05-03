@@ -30,7 +30,7 @@ function h6e_minimal_the_author()
 {
 	$author_id = get_the_author_meta( 'ID' );
 	echo get_avatar($author_id, 16) . ' ';
-	printf('<span class="meta-sep"> ' . __('by') . ' </span> ' . '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s</a></span>',
+	printf('<span class="meta-sep"> ' . __( 'by', 'minimal' ) . ' </span> ' . '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s</a></span>',
 		get_author_posts_url( $author_id ),
 		sprintf( esc_attr__( 'View all posts by %s', 'minimal' ), get_the_author() ),
 		get_the_author()
