@@ -3,6 +3,7 @@
 <div id="container">
 
 	<div id="content">
+		<div class="h6e-block">
 
 		<div class="post error404 not-found">
 			<h2 class="entry-title h6e-entry-title"><?php _e( 'Not Found', 'minimal' ); ?></h1>
@@ -11,8 +12,9 @@
 			</div>
 		</div>
 
+		</div>
 	</div><!-- #content -->
-	
+
 	<?php get_sidebar() ?>
 
 </div><!-- #container -->

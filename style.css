@@ -13,6 +13,7 @@ Author URI: http://h6e.net/
 #container {
 	width:100%;
 	overflow:hidden;
+	margin-top:2em;
 }
 
 #content {
@@ -45,17 +46,34 @@ Author URI: http://h6e.net/
 	margin:0.5em 0 0.25em;
 }
 
+/* Tabs and Blocks
+-------------------------------------------------------------- */
+
+.h6e-main-content .h6e-block.hasmenu {
+	border-top-left-radius:0;
+	-moz-border-radius-topleft:0;
+}
+
+.h6e-main-content .h6e-tabs li a {
+	position:relative;
+	top:-1px;
+}
+
+.h6e-main-content .h6e-tabs li.current-menu-item a {
+	font-weight:bold;
+}
+
 /* Content
 -------------------------------------------------------------- */
 
-.post {
-	margin:2.5em 0;
+.hentry, .post, .page {
+	padding:1em 0;
 }
 
 .day-date {
-	margin-top:1.5em;
+	margin-top:1em;
 	clear:left;
-	
+
 	/* like h6e-extra-title */
 	color:#4E5368;
 	font-size:1.6em;
@@ -68,7 +86,7 @@ Author URI: http://h6e.net/
 	margin-bottom:0;
 }
 
-.entry-title, .entry-title a, .entry-title a:visited {
+.h6e-main-content .entry-title, .h6e-main-content .entry-title a {
 	color:#009DFF;
 }
 
@@ -80,6 +98,7 @@ Author URI: http://h6e.net/
 	font-size:1.2em;
 	line-height:1.3em;
 	text-align:justify;
+	margin-top:1em;
 }
 
 .h6e-post-info img.avatar {
@@ -98,8 +117,13 @@ Author URI: http://h6e.net/
 	font-size:inherit;
 }
 
-.sidebar {
-	padding-left:2em;
+#sidebar .h6e-block {
+	margin-left:2em;
+}
+
+#sidebar ul.xoxo {
+	margin:1em 0;
+	list-style-type:none;
 }
 
 #s { width:60%; }
@@ -159,11 +183,4 @@ div.aligncenter {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-}
-
-/* Patch to h6e extra sidebars
--------------------------------------------------------------- */
-
-ul.xoxo {
-	list-style-type:none;
 }

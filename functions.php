@@ -1,30 +1,25 @@
 <?php
 
-if (!function_exists('h6e_minimal_setup')) {
-	function h6e_minimal_setup()
-	{
-		load_theme_textdomain( 'minimal' );
-	}
+function h6e_minimal_setup()
+{
+	register_nav_menus( array(
+		'primary' => __( 'Primary Navigation', 'minimal' ),
+	) );
+
+	register_sidebar( array(
+		'name' => 'Primary Widget Area',
+		'id' => 'primary-widget-area',
+		'description' => __( 'The primary widget area' , 'minimal' ),
+		'before_widget' => "\n\t\t\t" . '<li id="%1$s" class="widget-container h6e-extra-widget %2$s">',
+		'after_widget' => "\n\t\t\t</li>\n",
+		'before_title' => "\n\t\t\t\t". '<h3 class="widget-title h6e-extra-title">',
+		'after_title' => "</h3>\n"
+	) );
+
+	load_theme_textdomain( 'minimal' );
 }
 
 add_action( 'after_setup_theme', 'h6e_minimal_setup' );
-
-if (!function_exists('h6e_minimal_init')) {
-	function h6e_minimal_init()
-	{
-		register_sidebar( array(
-			'name' => 'Primary Widget Area',
-			'id' => 'primary-widget-area',
-			'description' => __( 'The primary widget area' , 'minimal' ),
-			'before_widget' => "\n\t\t\t" . '<li id="%1$s" class="widget-container h6e-extra-widget %2$s">',
-			'after_widget' => "\n\t\t\t</li>\n",
-			'before_title' => "\n\t\t\t\t". '<h3 class="widget-title h6e-extra-title">',
-			'after_title' => "</h3>\n"
-		) );
-	}
-}
-
-add_action( 'init', 'h6e_minimal_init' );
 
 function h6e_minimal_the_author()
 {
@@ -51,13 +46,14 @@ function h6e_minimal_the_title()
 	if ( is_single() ) {
 		single_post_title(); echo ' | '; bloginfo( 'name' );
 	} elseif ( is_home() || is_front_page() ) {
-		bloginfo( 'name' ); 
-		if( get_bloginfo( 'description' ) ) 
-			echo ' | ' ; bloginfo( 'description' ); 
+		bloginfo( 'name' );
+		if( get_bloginfo( 'description' ) )
+			echo ' | ' ; bloginfo( 'description' );
 		h6e_minimal_the_page_number();
 	} elseif ( is_page() ) {
 		single_post_title( '' ); echo ' | '; bloginfo( 'name' );
 	} elseif ( is_search() ) {
+		$s = $_GET['s'];
 		printf( __( 'Search results for "%s"', 'minimal' ), esc_html( $s ) ); h6e_minimal_the_page_number(); echo ' | '; bloginfo( 'name' );
 	} elseif ( is_404() ) {
 		_e( 'Not Found', 'minimal' ); echo ' | '; bloginfo( 'name' );
@@ -228,8 +224,9 @@ function h6e_minimal_theme_page() {
 function h6e_minimal_head() {
 	$head = "<style type='text/css'>\n<!--";
 	$output = '';
-	if ( false !== ( $titlecolor = get_option('h6e_minimal_titlecolor') ) ) {
-		$output .= ".h6e-entry-title, .h6e-entry-title a, .h6e-entry-title a:visited { color: $titlecolor; }\n";
+
+	if ( false !== ( $titlecolor = get_option('h6e_minimal_titlecolor') ) && $titlecolor != '#009DFF' ) {
+		$output .= ".h6e-main-content .entry-title, .h6e-main-content .entry-title a { color: $titlecolor; }\n";
 	}
 	if ( false !== ( $pagewidth = get_option('h6e_minimal_pagewidth') ) && $pagewidth != 'auto' ) {
 		$output .= ".h6e-main-content { width: $pagewidth; }\n";
@@ -239,6 +236,19 @@ function h6e_minimal_head() {
 	} else {
 		$output .= ".h6e-main-content { font-size: 1.2em; }\n";
 	}
+
+	if (class_exists('Ld_Ui')) {
+		$colors = Ld_Ui::getApplicationColors();
+		$output .= ".day-date, .entry { color:#" . $colors['ld-colors-text-3'] . "; }\n";
+		if ($colors['ld-colors-background'] != $colors['ld-colors-background-3'] || $colors['ld-colors-background'] != $colors['ld-colors-border-3']) {
+			$output .= ".h6e-block { padding:0 1.5em; }". "\n";
+		} else {
+			$output .= ".sidebar { padding-left:2em; }". "\n";
+			$output .= ".h6e-tabs li a { padding-left:0; }". "\n";
+		}
+		$output .= ".h6e-main-content .h6e-tabs li.current-menu-item a  { border-bottom-color:#" . $colors['ld-colors-background-3'] . "; }". "\n";
+	}
+
 	$foot = "--></style>\n";
 	if ( '' != $output )
 		echo $head . $output . $foot;
