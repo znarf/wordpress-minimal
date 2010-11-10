@@ -16,10 +16,9 @@
 						<p><?php _e( 'Sorry, but nothing matched your search criteria. Please try again with some different keywords.', 'minimal' ); ?></p>
 						<?php get_search_form(); ?>
 					</div>
-<?php endif; ?>
 				</div>
+<?php endif; ?>
 		</div>
-
 	</div> <!-- #content -->
 
 	<?php get_sidebar() ?>
