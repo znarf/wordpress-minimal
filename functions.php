@@ -237,16 +237,16 @@ function h6e_minimal_head() {
 		$output .= ".h6e-main-content { font-size: 1.2em; }\n";
 	}
 
-	if (class_exists('Ld_Ui')) {
+	if (defined('LD_APPEARANCE') && constant('LD_APPEARANCE')) {
 		$colors = Ld_Ui::getApplicationColors();
 		$output .= ".day-date, .entry { color:#" . $colors['ld-colors-text-3'] . "; }\n";
-		if ($colors['ld-colors-background'] != $colors['ld-colors-background-3'] || $colors['ld-colors-background'] != $colors['ld-colors-border-3']) {
-			$output .= ".h6e-block { padding:0 1.5em; }". "\n";
-		} else {
-			$output .= ".sidebar { padding-left:2em; }". "\n";
+		if ($colors['ld-colors-background'] == $colors['ld-colors-background-3'] && $colors['ld-colors-background'] == $colors['ld-colors-border-3']) {
+			$output .= ".h6e-block { padding:0 }". "\n";
 			$output .= ".h6e-tabs li a { padding-left:0; }". "\n";
+			$output .= ".ld-instance-menu li a, .h6e-tabs li a, .ld-panel-content, .h6e-block, .h6e-page {
+				background:transparent; border:transparent; -moz-box-shadow:none; }";
 		}
-		$output .= ".h6e-main-content .h6e-tabs li.current-menu-item a  { border-bottom-color:#" . $colors['ld-colors-background-3'] . "; }". "\n";
+		$output .= ".h6e-main-content .h6e-tabs li.current-menu-item a { border-bottom-color:#" . $colors['ld-colors-background-3'] . "; }". "\n";
 	}
 
 	$foot = "--></style>\n";

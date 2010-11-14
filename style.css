@@ -61,6 +61,12 @@ Author URI: http://h6e.net/
 
 .h6e-main-content .h6e-tabs li.current-menu-item a {
 	font-weight:bold;
+	border-bottom-color:white;
+}
+
+.h6e-block {
+	padding:0 1.5em;
+	background:white;
 }
 
 /* Content
