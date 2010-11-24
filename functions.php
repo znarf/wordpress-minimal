@@ -17,6 +17,8 @@ function h6e_minimal_setup()
 	) );
 
 	load_theme_textdomain( 'minimal' );
+
+	add_theme_support( 'automatic-feed-links' );
 }
 
 add_action( 'after_setup_theme', 'h6e_minimal_setup' );
@@ -25,7 +27,9 @@ function h6e_minimal_the_author()
 {
 	$author_id = get_the_author_meta( 'ID' );
 	echo get_avatar($author_id, 16) . ' ';
-	printf('<span class="meta-sep"> ' . __( 'by', 'minimal' ) . ' </span> ' . '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s</a></span>',
+	printf(
+		'<span class="meta-sep"> ' . __( 'by', 'minimal' ) . ' </span> ' .
+		'<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s</a></span>',
 		get_author_posts_url( $author_id ),
 		sprintf( esc_attr__( 'View all posts by %s', 'minimal' ), get_the_author() ),
 		get_the_author()
@@ -95,17 +99,13 @@ function h6e_minimal_css()
 	}
 }
 
-function minimal_top_bar()
+add_action('minimal_top', 'h6e_minimal_top_bar');
+
+function h6e_minimal_top_bar()
 {
-	if (get_option('topbar') == 'never') {
-		$top_bar = false;
-	} else if (get_option('topbar') == 'connected' && !is_user_logged_in()) {
-		$top_bar = false;
-	} else {
-		$top_bar = true;
-	}
-	if (class_exists('Ld_Ui') && method_exists('Ld_Ui', 'top_bar') && $top_bar) {
-		Ld_Ui::top_bar(array(
+	$topbar = get_option('topbar');
+	if (empty($topbar) || $topbar == 'everyone' || ($topbar == 'connected' && is_user_logged_in())) {
+		Ld_Ui::topBar(array(
 			'loginUrl' => wp_login_url(), 'logoutUrl' => wp_logout_url($_SERVER["REQUEST_URI"])
 		));
 	}
