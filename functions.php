@@ -111,6 +111,15 @@ function minimal_top_bar()
 	}
 }
 
+function h6e_minimal_html_header()
+{
+	if (class_exists('Ld_Ui') && method_exists('Ld_Ui', 'topNav')) {
+		Ld_Ui::topNav();
+	}
+}
+
+add_action('minimal_html_header', 'h6e_minimal_html_header');
+
 add_action('admin_menu', 'h6e_minimal_add_theme_page');
 
 function h6e_minimal_add_theme_page()

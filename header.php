@@ -33,3 +33,6 @@
 			<?php bloginfo('description') ?>
 		</div>
 	</div><!-- #header -->
+
+	<?php do_action('minimal_html_header') ?>
+
