@@ -1,5 +1,5 @@
 <div id="sidebar">
-	<div class="h6e-block">
+	<div <?php h6e_block_class('inner-sidebar') ?>>
 
 		<div id="primary" class="widget-area sidebar">
 			<ul class="xoxo">

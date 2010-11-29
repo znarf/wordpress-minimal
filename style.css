@@ -1,8 +1,8 @@
 /*
 Theme Name: Minimal
-Theme URI: http://h6e.net/wordpress/themes/wp-minimal
-Description: A Minimal theme for Wordpress. Built with native bmPress support.
-Version: 3.0.0
+Theme URI: http://h6e.net/wordpress/themes/#minimal
+Description: A Minimal theme for Wordpress.
+Version: 3.1.0
 Author: h6e.net
 Author URI: http://h6e.net/
 */
@@ -17,12 +17,12 @@ Author URI: http://h6e.net/
 }
 
 #content {
-	width:70%;
+	width:67.5%;
 	float:left;
 }
 
 #sidebar {
-	width:30%;
+	width:32.5%;
 	float:left;
 }
 
@@ -64,11 +64,6 @@ Author URI: http://h6e.net/
 	border-bottom-color:white;
 }
 
-.h6e-block {
-	padding:0 1.5em;
-	background:white;
-}
-
 /* Content
 -------------------------------------------------------------- */
 
@@ -77,7 +72,7 @@ Author URI: http://h6e.net/
 }
 
 .day-date {
-	margin-top:1em;
+	margin-top:1.25em;
 	clear:left;
 
 	/* like h6e-extra-title */
@@ -92,7 +87,7 @@ Author URI: http://h6e.net/
 	margin-bottom:0;
 }
 
-.h6e-main-content .entry-title, .h6e-main-content .entry-title a {
+.entry-title, .entry-title a {
 	color:#009DFF;
 }
 
@@ -123,8 +118,8 @@ Author URI: http://h6e.net/
 	font-size:inherit;
 }
 
-#sidebar .h6e-block {
-	margin-left:2em;
+#sidebar .inner-sidebar {
+	margin-left:5em;
 }
 
 #sidebar ul.xoxo {
@@ -149,6 +144,11 @@ Author URI: http://h6e.net/
 .bm-mark .entry-title, .bm-mark .entry-title a {
 	color:#4E5368;
 }
+
+/* h6e "patches"
+-------------------------------------------------------------- */
+
+.h6e-extra-widget { margin:2em 0; }
 
 /* WP images (from WP default theme)
 -------------------------------------------------------------- */

@@ -1,7 +1,7 @@
 <package>
   <id>wordpress-theme-minimal</id>
   <name>Minimal</name>
-  <version>3.0.1-3</version>
+  <version>3.0.1-5</version>
   <type>theme</type>
   <need>css-h6e-minimal</need>
   <extend>wordpress</extend>
@@ -9,12 +9,11 @@
   <colors>
       <scheme>base</scheme>
       <scheme>bars</scheme>
-      <scheme>panels</scheme>
   </colors>
   <configuration>
       <preference type="text" name="h6e_minimal_pagewidth" label="Width" defaultValue="auto"/>
       <preference type="text" name="h6e_minimal_fontsize" label="Font Size" defaultValue="1.2em"/>
-      <preference type="list" label="Display the top bar" name="topbar">
+      <preference type="list" label="Display Top Bar" name="topbar">
           <option value="everyone" label="For everyone"/>
           <option value="connected" label="For connected users"/>
           <option value="never" label="Never"/>

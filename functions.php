@@ -86,6 +86,26 @@ if (!function_exists('h6e_previous_posts_link_attributes')) {
 
 add_filter('previous_posts_link_attributes', 'h6e_previous_posts_link_attributes');
 
+function h6e_post_class( $class = '', $post_id = null )
+{
+	$classes = get_post_class( $class, $post_id );
+	if (empty($classes) && !empty($class)) {
+		$classes = array($class);
+	}
+	echo 'class="' . join( ' ', $classes ) . '"';
+}
+
+function h6e_block_class($class = '')
+{
+	global $menu;
+	$classes = array($class);
+	if ($menu) {
+		$classes = array('has-menu');
+	}
+	$classes = apply_filters('h6e_block_class', $classes);
+	echo 'class="' . join( ' ', $classes ) . '"';
+}
+
 function h6e_minimal_css()
 {
 	if (method_exists('Ld_Ui', 'getCssUrl')) {
@@ -119,6 +139,17 @@ function h6e_minimal_html_header()
 }
 
 add_action('minimal_html_header', 'h6e_minimal_html_header');
+
+function h6e_minimal_menu()
+{
+	global $menu;
+	$params = array( 'fallback_cb' => '', 'echo' => false, 'container' => '', 'container_class' => 'menu-principal',
+		'menu_class' => 'h6e-tabs', 'theme_location' => 'primary', 'depth' => 1 );
+	$menu = wp_nav_menu($params);
+	if (isset($menu)) {
+		echo $menu;
+	}
+}
 
 add_action('admin_menu', 'h6e_minimal_add_theme_page');
 
@@ -167,7 +198,6 @@ function h6e_minimal_add_theme_page()
 		__('Minimal options', 'minimal'), __('Minimal options', 'minimal'), 'edit_theme_options', basename(__FILE__), 'h6e_minimal_theme_page'
 	);
 }
-
 
 function h6e_minimal_theme_page() {
 	if ( isset( $_REQUEST['saved'] ) )
@@ -231,34 +261,59 @@ function h6e_minimal_theme_page() {
 <?php }
 
 function h6e_minimal_head() {
-	$head = "<style type='text/css'>\n<!--";
+	$head = '<style type="text/css">' . "\n";
 	$output = '';
 
+	$rules = array();
+
 	if ( false !== ( $titlecolor = get_option('h6e_minimal_titlecolor') ) && $titlecolor != '#009DFF' ) {
-		$output .= ".h6e-main-content .entry-title, .h6e-main-content .entry-title a { color: $titlecolor; }\n";
+		$rules[] = array('selectors' => array('.entry-title, .entry-title a'), 'property' => 'color', 'value' => $titlecolor);
 	}
 	if ( false !== ( $pagewidth = get_option('h6e_minimal_pagewidth') ) && $pagewidth != 'auto' ) {
-		$output .= ".h6e-main-content { width: $pagewidth; }\n";
+		$rules[] = array('selectors' => array('.h6e-main-content'), 'property' => 'width', 'value' => $pagewidth);
 	}
 	if ( false !== ( $fontsize = get_option('h6e_minimal_fontsize') ) ) {
-		$output .= ".h6e-main-content { font-size: $fontsize; }\n";
+		$rules[] = array('selectors' => array('.h6e-main-content'), 'property' => 'font-size', 'value' => $fontsize);
 	} else {
-		$output .= ".h6e-main-content { font-size: 1.2em; }\n";
+		$rules[] = array('selectors' => array('.h6e-main-content'), 'property' => 'font-size', 'value' => '1.2em');
 	}
 
 	if (defined('LD_APPEARANCE') && constant('LD_APPEARANCE')) {
 		$colors = Ld_Ui::getApplicationColors();
-		$output .= ".day-date, .entry { color:#" . $colors['ld-colors-text-3'] . "; }\n";
-		if ($colors['ld-colors-background'] == $colors['ld-colors-background-3'] && $colors['ld-colors-background'] == $colors['ld-colors-border-3']) {
-			$output .= ".h6e-block { padding:0 }". "\n";
-			$output .= ".h6e-tabs li a { padding-left:0; }". "\n";
-			$output .= ".ld-instance-menu li a, .h6e-tabs li a, .ld-panel-content, .h6e-block, .h6e-page {
-				background:transparent; border:transparent; -moz-box-shadow:none; }";
-		}
-		$output .= ".h6e-main-content .h6e-tabs li.current-menu-item a { border-bottom-color:#" . $colors['ld-colors-background-3'] . "; }". "\n";
+		$rules[] = array(
+			'selectors' => array('.day-date', '.entry'),
+			'property' => 'color',
+			'value' => '#' . $colors['ld-colors-text']);
+		$rules[] = array(
+			'selectors' => array('.h6e-block .day-date', '.h6e-block .entry'),
+			'property' => 'color',
+			'value' => '#' . $colors['ld-colors-text-3']);
+		$rules[] = array(
+			'selectors' => array(
+				'.h6e-main-content .h6e-entry-title',
+				'.h6e-main-content .h6e-entry-title a',
+				'.h6e-main-content .h6e-extra-title'),
+			'property' => 'color',
+			'value' => '#' . $colors['ld-colors-text']);
+		$rules[] = array(
+			'selectors' => array(
+				'.h6e-main-content .h6e-block .h6e-entry-title',
+				'.h6e-main-content .h6e-block .h6e-entry-title a',
+				'.h6e-main-content .h6e-block .h6e-extra-title'),
+			'property' => 'color',
+			'value' => '#' . $colors['ld-colors-title-3']);
+		$rules[] = array(
+			'selectors' => array('.h6e-main-content .h6e-tabs li.current-menu-item a'),
+			'property' => 'color',
+			'value' => '#' . $colors['ld-colors-background-3']);
 	}
 
-	$foot = "--></style>\n";
+	foreach ($rules as $rule) {
+		extract($rule);
+		$output .= sprintf('%s {%s:%s;}'."\n", join(',', $selectors), $property, $value);
+	}
+
+	$foot = "</style>\n";
 	if ( '' != $output )
 		echo $head . $output . $foot;
 }
