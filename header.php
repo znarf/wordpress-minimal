@@ -3,8 +3,6 @@
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
 <title><?php h6e_minimal_the_title() ?></title>
-<link rel="stylesheet" href="<?php h6e_minimal_css() ?>" type="text/css" media="screen" />
-<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?v=3.0.0" type="text/css" media="screen" />
 <?php wp_head() ?>
 </head>
 

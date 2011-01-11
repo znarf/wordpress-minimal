@@ -86,6 +86,14 @@ if (!function_exists('h6e_previous_posts_link_attributes')) {
 
 add_filter('previous_posts_link_attributes', 'h6e_previous_posts_link_attributes');
 
+function h6e_body_class($classes)
+{
+	$classes[] = 'ld-layout';
+	return $classes;
+}
+
+add_filter('body_class', 'ld_body_class');
+
 function h6e_post_class( $class = '', $post_id = null )
 {
 	$classes = get_post_class( $class, $post_id );
@@ -106,28 +114,24 @@ function h6e_block_class($class = '')
 	echo 'class="' . join( ' ', $classes ) . '"';
 }
 
+function h6e_minimal_stylesheets()
+{
+	wp_enqueue_style('h6e-minimal', h6e_minimal_css());
+	wp_enqueue_style('theme', get_bloginfo('stylesheet_url'), null, '3.0.0');
+}
+
+add_action('wp_head', 'h6e_minimal_stylesheets', 2);
+
 function h6e_minimal_css()
 {
 	if (method_exists('Ld_Ui', 'getCssUrl')) {
-		echo Ld_Ui::getCssUrl('/h6e-minimal/h6e-minimal.css', 'css-h6e-minimal');
+		return Ld_Ui::getCssUrl('/h6e-minimal/h6e-minimal.css', 'css-h6e-minimal');
 	} else if (file_exists(dirname(__FILE__) . '/h6e-minimal')) {
-		echo get_bloginfo('stylesheet_directory') . '/h6e-minimal/h6e-minimal.css';
+		return get_bloginfo('stylesheet_directory') . '/h6e-minimal/h6e-minimal.css';
 	} else if (defined('H6E_CSS')) {
-		echo H6E_CSS . '/h6e-minimal/h6e-minimal.css';
+		return H6E_CSS . '/h6e-minimal/h6e-minimal.css';
 	} else {
-		echo 'http://h6e.net/css/h6e-minimal/h6e-minimal.css';
-	}
-}
-
-add_action('minimal_top', 'h6e_minimal_top_bar');
-
-function h6e_minimal_top_bar()
-{
-	$topbar = get_option('topbar');
-	if (empty($topbar) || $topbar == 'everyone' || ($topbar == 'connected' && is_user_logged_in())) {
-		Ld_Ui::topBar(array(
-			'loginUrl' => wp_login_url(), 'logoutUrl' => wp_logout_url($_SERVER["REQUEST_URI"])
-		));
+		return 'http://h6e.net/css/h6e-minimal/h6e-minimal.css';
 	}
 }
 
