@@ -114,14 +114,6 @@ function h6e_block_class($class = '')
 	echo 'class="' . join( ' ', $classes ) . '"';
 }
 
-function h6e_minimal_stylesheets()
-{
-	wp_enqueue_style('h6e-minimal', h6e_minimal_css());
-	wp_enqueue_style('theme', get_bloginfo('stylesheet_url'), null, '3.0.0');
-}
-
-add_action('wp_head', 'h6e_minimal_stylesheets', 2);
-
 function h6e_minimal_css()
 {
 	if (method_exists('Ld_Ui', 'getCssUrl')) {
