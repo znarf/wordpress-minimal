@@ -271,7 +271,7 @@ function h6e_minimal_head() {
 	if ( false !== ( $fontsize = get_option('h6e_minimal_fontsize') ) ) {
 		$rules[] = array('selectors' => array('.h6e-main-content'), 'property' => 'font-size', 'value' => $fontsize);
 	} else {
-		$rules[] = array('selectors' => array('.h6e-main-content'), 'property' => 'font-size', 'value' => '1.2em');
+		// $rules[] = array('selectors' => array('.h6e-main-content'), 'property' => 'font-size', 'value' => '1.2em');
 	}
 
 	if (defined('LD_APPEARANCE') && constant('LD_APPEARANCE')) {
